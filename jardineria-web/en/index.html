@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GrowEasy — Home Gardening & Urban Growing Guides</title>
+<meta name="description" content="Practical guides for home gardening, urban growing and houseplants. Learn to grow your own food and create green spaces from scratch.">
+<meta name="keywords" content="home gardening, urban garden, grow vegetables at home, houseplants, balcony garden, container gardening, grow food">
+<link rel="alternate" hreflang="es" href="../es/index.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600&family=Nunito:wght@300;400;500;600&display=swap" rel="stylesheet">
+<!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXX" crossorigin="anonymous"></script> -->
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#f4f7f0;--white:#ffffff;--ink:#1c2318;--ink-2:#4a5244;--ink-3:#8a9484;--green:#3a7d44;--green-2:#2d6235;--green-light:#e8f2ea;--green-pale:#f0f7f1;--earth:#8b5e3c;--earth-light:#f5ede6;--border:#d8e4d4;--serif:'Lora',Georgia,serif;--sans:'Nunito',system-ui,sans-serif}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--bg);color:var(--ink);font-size:16px;line-height:1.7;font-weight:400}
+nav{position:sticky;top:0;z-index:100;background:var(--white);border-bottom:1px solid var(--border);padding:0 clamp(1rem,5vw,4rem);display:flex;align-items:center;justify-content:space-between;height:64px}
+.nav-logo{font-family:var(--serif);font-size:1.2rem;font-weight:600;color:var(--green-2);text-decoration:none;display:flex;align-items:center;gap:.5rem}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{font-size:.85rem;color:var(--ink-2);text-decoration:none;transition:color .2s;font-weight:500}
+.nav-links a:hover{color:var(--green)}
+.lang-switch{font-size:.78rem;font-weight:600;color:var(--green);text-decoration:none;border:1.5px solid var(--green-light);background:var(--green-pale);padding:.28rem .65rem;border-radius:2rem;transition:all .2s}
+.lang-switch:hover{background:var(--green-light)}
+.ad-slot{background:var(--white);border:1px dashed var(--border);display:flex;align-items:center;justify-content:center;color:var(--ink-3);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase}
+.ad-banner{height:90px;margin:0 clamp(1rem,5vw,4rem)}
+.ad-sidebar{height:250px;width:100%}
+.hero{background:var(--green-2);padding:clamp(3.5rem,9vw,7rem) clamp(1rem,5vw,4rem);position:relative;overflow:hidden}
+.hero-dots{position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.06) 1.5px,transparent 1.5px);background-size:28px 28px}
+.hero-inner{position:relative;max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+.hero-tag{display:inline-block;background:rgba(255,255,255,.12);color:rgba(255,255,255,.85);font-size:.72rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;padding:.3rem .8rem;border-radius:2rem;margin-bottom:1.2rem}
+.hero h1{font-family:var(--serif);font-size:clamp(2.2rem,5vw,3.4rem);font-weight:600;line-height:1.12;color:white;margin-bottom:1.3rem}
+.hero p{font-size:1rem;color:rgba(255,255,255,.7);margin-bottom:2rem;max-width:440px;line-height:1.75}
+.hero-cta{display:inline-flex;align-items:center;gap:.5rem;background:white;color:var(--green-2);text-decoration:none;padding:.85rem 1.75rem;font-size:.9rem;font-weight:600;border-radius:50px;transition:transform .15s,box-shadow .2s;box-shadow:0 2px 16px rgba(0,0,0,.15)}
+.hero-cta:hover{transform:translateY(-2px);box-shadow:0 4px 24px rgba(0,0,0,.2)}
+.hero-cards{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
+.season-card{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);border-radius:10px;padding:1.1rem;color:white}
+.season-icon{font-size:1.6rem;margin-bottom:.4rem}
+.season-name{font-size:.78rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;opacity:.65;margin-bottom:.4rem}
+.season-items{font-size:.82rem;opacity:.85;line-height:1.5}
+.wrap{max-width:1100px;margin:0 auto;padding:0 clamp(1rem,5vw,4rem)}
+.sec-header{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:1.75rem;padding-bottom:.9rem;border-bottom:2px solid var(--border)}
+.sec-title{font-family:var(--serif);font-size:1.6rem;font-weight:600}
+.sec-link{font-size:.82rem;color:var(--green);text-decoration:none;font-weight:600}
+.sec-link:hover{text-decoration:underline}
+.cats{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:.85rem;margin-bottom:3.5rem}
+.cat-card{background:var(--white);border:2px solid var(--border);border-radius:12px;padding:1.25rem 1rem;text-decoration:none;color:var(--ink);transition:border-color .2s,transform .15s,box-shadow .2s;display:flex;flex-direction:column;gap:.5rem;text-align:center;align-items:center}
+.cat-card:hover{border-color:var(--green);transform:translateY(-3px);box-shadow:0 4px 16px rgba(58,125,68,.12)}
+.cat-icon{font-size:1.8rem}
+.cat-name{font-weight:600;font-size:.88rem}
+.cat-count{font-size:.72rem;color:var(--ink-3)}
+.grid-2{display:grid;grid-template-columns:2fr 1fr;gap:2.5rem;margin-bottom:3.5rem}
+.articles-col{display:flex;flex-direction:column;gap:1rem}
+.art{background:var(--white);border:2px solid var(--border);border-radius:12px;padding:1.25rem;text-decoration:none;color:var(--ink);transition:border-color .2s,box-shadow .2s,transform .15s;display:flex;gap:1.1rem;align-items:flex-start}
+.art:hover{border-color:var(--green);box-shadow:0 4px 16px rgba(58,125,68,.1);transform:translateY(-1px)}
+.art-thumb{background:var(--green-pale);border-radius:8px;width:90px;height:90px;display:flex;align-items:center;justify-content:center;font-size:2rem;flex-shrink:0}
+.art-tag{font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--green);margin-bottom:.3rem}
+.art-title{font-family:var(--serif);font-size:1rem;font-weight:600;line-height:1.3;margin-bottom:.4rem}
+.art-excerpt{font-size:.82rem;color:var(--ink-2);line-height:1.55}
+.art-meta{display:flex;gap:.75rem;align-items:center;margin-top:.5rem;font-size:.72rem;color:var(--ink-3)}
+.difficulty{display:inline-flex;align-items:center;gap:.25rem;font-size:.68rem;font-weight:600;padding:.18rem .55rem;border-radius:2rem}
+.d-easy{background:var(--green-light);color:var(--green-2)}
+.d-med{background:var(--earth-light);color:var(--earth)}
+.sidebar{display:flex;flex-direction:column;gap:1.75rem}
+.widget{background:var(--white);border:2px solid var(--border);border-radius:12px;padding:1.35rem}
+.w-title{font-family:var(--serif);font-size:1rem;font-weight:600;margin-bottom:.9rem;padding-bottom:.7rem;border-bottom:1px solid var(--border)}
+.pop-list{list-style:none;display:flex;flex-direction:column;gap:.7rem}
+.pop-list li{display:flex;gap:.65rem;align-items:flex-start}
+.pop-num{font-size:.85rem;font-weight:700;color:var(--green-light);min-width:1.4rem;line-height:1.4}
+.pop-list a{font-size:.82rem;color:var(--ink);text-decoration:none;line-height:1.4}
+.pop-list a:hover{color:var(--green)}
+.season-widget{display:flex;flex-direction:column;gap:.5rem}
+.sw-row{background:var(--green-pale);border-radius:8px;padding:.7rem .9rem;font-size:.82rem}
+.sw-month{font-weight:600;color:var(--green-2);margin-bottom:.2rem}
+.sw-items{color:var(--ink-2);font-size:.78rem}
+.tags{display:flex;flex-wrap:wrap;gap:.45rem}
+.tag{font-size:.72rem;background:var(--bg);border:1.5px solid var(--border);padding:.28rem .65rem;border-radius:2rem;text-decoration:none;color:var(--ink-2);transition:all .15s;font-weight:500}
+.tag:hover{border-color:var(--green);color:var(--green);background:var(--green-pale)}
+.newsletter{background:var(--green);padding:3rem clamp(1rem,5vw,4rem);margin:1.5rem 0;text-align:center;position:relative;overflow:hidden}
+.newsletter-dots{position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.07) 1.5px,transparent 1.5px);background-size:24px 24px}
+.newsletter h2{font-family:var(--serif);font-size:1.6rem;font-weight:600;margin-bottom:.4rem;color:white;position:relative}
+.newsletter p{color:rgba(255,255,255,.75);font-size:.9rem;margin-bottom:1.5rem;position:relative}
+.nl-form{display:flex;gap:.65rem;max-width:420px;margin:0 auto;position:relative}
+.nl-form input{flex:1;border:none;background:white;padding:.75rem 1rem;font-family:var(--sans);font-size:.88rem;border-radius:50px;outline:none}
+.nl-form button{background:var(--ink);color:white;border:none;padding:.75rem 1.4rem;font-family:var(--sans);font-size:.85rem;font-weight:600;border-radius:50px;cursor:pointer;transition:background .2s;white-space:nowrap}
+.nl-form button:hover{background:#2d2a1e}
+footer{background:var(--ink);color:rgba(255,255,255,.5);padding:2.5rem clamp(1rem,5vw,4rem)}
+.ft-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr;gap:2.5rem}
+.ft-brand p{font-size:.82rem;line-height:1.6;margin-top:.7rem}
+.ft-logo{font-family:var(--serif);font-size:1.2rem;font-weight:600;color:white;text-decoration:none}
+.ft-col h4{font-size:.7rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.75);margin-bottom:.9rem}
+.ft-col ul{list-style:none;display:flex;flex-direction:column;gap:.45rem}
+.ft-col a{font-size:.82rem;color:rgba(255,255,255,.45);text-decoration:none;transition:color .2s}
+.ft-col a:hover{color:white}
+.ft-bottom{max-width:1100px;margin:1.75rem auto 0;padding-top:1.25rem;border-top:1px solid rgba(255,255,255,.1);display:flex;justify-content:space-between;font-size:.72rem}
+.ft-bottom a{color:rgba(255,255,255,.35);text-decoration:none}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+.hero-content{animation:fadeUp .6s ease both}
+.hero-cards{animation:fadeUp .6s .15s ease both}
+@media(max-width:768px){.hero-inner{grid-template-columns:1fr}.hero-cards{display:none}.grid-2{grid-template-columns:1fr}.sidebar{display:none}.ft-inner{grid-template-columns:1fr;gap:1.5rem}.nav-links{display:none}.ft-bottom{flex-direction:column;gap:.4rem}.art{flex-direction:column}.art-thumb{width:100%;height:120px}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">🌿 GrowEasy</a>
+  <ul class="nav-links">
+    <li><a href="#">Veg garden</a></li>
+    <li><a href="#">Houseplants</a></li>
+    <li><a href="#">Garden</a></li>
+    <li><a href="#">By season</a></li>
+  </ul>
+  <a href="../es/index.html" class="lang-switch">ES</a>
+</nav>
+
+<div class="ad-slot ad-banner">
+  <!-- <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXX" data-ad-slot="XXXXXXXX" data-ad-format="auto"></ins><script>(adsbygoogle=window.adsbygoogle||[]).push({})</script> -->
+  <span>Advertisement</span>
+</div>
+
+<section class="hero">
+  <div class="hero-dots"></div>
+  <div class="hero-inner">
+    <div class="hero-content">
+      <span class="hero-tag">🌱 Gardening · Growing · Plants</span>
+      <h1>Grow your own food, even without a garden</h1>
+      <p>Practical guides for urban growing, balcony gardens and houseplants. From seed to harvest, step by step.</p>
+      <a href="#articles" class="hero-cta">Browse guides →</a>
+    </div>
+    <div class="hero-cards">
+      <div class="season-card">
+        <div class="season-icon">🍅</div>
+        <div class="season-name">In season now</div>
+        <div class="season-items">Tomatoes · Peppers · Courgettes · Aubergines</div>
+      </div>
+      <div class="season-card">
+        <div class="season-icon">🌿</div>
+        <div class="season-name">Easy herbs</div>
+        <div class="season-items">Basil · Mint · Rosemary · Thyme</div>
+      </div>
+      <div class="season-card">
+        <div class="season-icon">🪴</div>
+        <div class="season-name">For indoors</div>
+        <div class="season-items">Pothos · Snake plant · Monstera · Aloe</div>
+      </div>
+      <div class="season-card">
+        <div class="season-icon">🌻</div>
+        <div class="season-name">For the balcony</div>
+        <div class="season-items">Geraniums · Petunias · Lavender · Roses</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div style="padding:2.5rem 0">
+  <div class="wrap">
+    <div class="sec-header">
+      <h2 class="sec-title">Categories</h2>
+      <a href="#" class="sec-link">View all →</a>
+    </div>
+    <div class="cats">
+      <a href="#" class="cat-card"><span class="cat-icon">🥕</span><span class="cat-name">Urban veg garden</span><span class="cat-count">48 guides</span></a>
+      <a href="#" class="cat-card"><span class="cat-icon">🪴</span><span class="cat-name">Houseplants</span><span class="cat-count">35 guides</span></a>
+      <a href="#" class="cat-card"><span class="cat-icon">🌸</span><span class="cat-name">Flowers & garden</span><span class="cat-count">29 guides</span></a>
+      <a href="#" class="cat-card"><span class="cat-icon">🌿</span><span class="cat-name">Herbs</span><span class="cat-count">22 guides</span></a>
+      <a href="#" class="cat-card"><span class="cat-icon">🪱</span><span class="cat-name">Soil & compost</span><span class="cat-count">17 guides</span></a>
+      <a href="#" class="cat-card"><span class="cat-icon">🐛</span><span class="cat-name">Pests & care</span><span class="cat-count">24 guides</span></a>
+    </div>
+  </div>
+</div>
+
+<div class="wrap" id="articles" style="margin-top:1rem">
+  <div class="sec-header">
+    <h2 class="sec-title">Latest guides</h2>
+    <a href="#" class="sec-link">View all →</a>
+  </div>
+  <div class="grid-2">
+    <div class="articles-col">
+      <a href="#" class="art">
+        <div class="art-thumb">🍅</div>
+        <div><p class="art-tag">Urban garden</p><h3 class="art-title">How to grow tomatoes in pots on a balcony: complete guide</h3><p class="art-excerpt">Variety, compost, watering and support. Everything you need to grow your own tomatoes even if you live in a flat.</p><div class="art-meta"><span>9 min</span><span class="difficulty d-easy">🟢 Easy</span></div></div>
+      </a>
+      <a href="#" class="art">
+        <div class="art-thumb">🪴</div>
+        <div><p class="art-tag">Houseplants</p><h3 class="art-title">10 most resilient houseplants for people who forget to water</h3><p class="art-excerpt">Plants that survive neglect, low light and dry air. Perfect for beginners and busy people.</p><div class="art-meta"><span>6 min</span><span class="difficulty d-easy">🟢 Easy</span></div></div>
+      </a>
+      <a href="#" class="art">
+        <div class="art-thumb">🪱</div>
+        <div><p class="art-tag">Compost</p><h3 class="art-title">How to compost at home without smells or insects: bokashi & worm composting</h3><p class="art-excerpt">Turn kitchen scraps into plant fertiliser. No garden, no bad smells and no fuss.</p><div class="art-meta"><span>11 min</span><span class="difficulty d-med">🟡 Medium</span></div></div>
+      </a>
+      <a href="#" class="art">
+        <div class="art-thumb">🌿</div>
+        <div><p class="art-tag">Herbs</p><h3 class="art-title">Window herb garden: keeping basil, mint and more alive at home</h3><p class="art-excerpt">How to keep supermarket herbs alive and grow your own on a windowsill.</p><div class="art-meta"><span>7 min</span><span class="difficulty d-easy">🟢 Easy</span></div></div>
+      </a>
+      <a href="#" class="art">
+        <div class="art-thumb">🐛</div>
+        <div><p class="art-tag">Pests</p><h3 class="art-title">How to get rid of aphids naturally without chemical pesticides</h3><p class="art-excerpt">Home and organic methods to remove aphids without harming your plants or the environment.</p><div class="art-meta"><span>8 min</span><span class="difficulty d-easy">🟢 Easy</span></div></div>
+      </a>
+    </div>
+    <aside class="sidebar">
+      <div class="ad-slot ad-sidebar">
+        <!-- <ins class="adsbygoogle" style="display:block;width:300px;height:250px" data-ad-client="ca-pub-XXXXXXXX" data-ad-slot="XXXXXXXX"></ins><script>(adsbygoogle=window.adsbygoogle||[]).push({})</script> -->
+        <span>Advertisement</span>
+      </div>
+      <div class="widget">
+        <h3 class="w-title">What to plant this month</h3>
+        <div class="season-widget">
+          <div class="sw-row"><div class="sw-month">Outdoors</div><div class="sw-items">Tomatoes, peppers, courgettes, runner beans</div></div>
+          <div class="sw-row"><div class="sw-month">Indoors</div><div class="sw-items">Basil, coriander, chives, parsley</div></div>
+          <div class="sw-row"><div class="sw-month">Flowers</div><div class="sw-items">Geraniums, petunias, gazanias, verbenas</div></div>
+        </div>
+      </div>
+      <div class="widget">
+        <h3 class="w-title">Most read</h3>
+        <ul class="pop-list">
+          <li><span class="pop-num">01</span><a href="#">Why are my plant's leaves turning yellow?</a></li>
+          <li><span class="pop-num">02</span><a href="#">All-purpose vs specific compost: which to use</a></li>
+          <li><span class="pop-num">03</span><a href="#">When and how to repot a plant</a></li>
+          <li><span class="pop-num">04</span><a href="#">DIY drip irrigation for when you go on holiday</a></li>
+          <li><span class="pop-num">05</span><a href="#">Best fertilisers for tomatoes</a></li>
+        </ul>
+      </div>
+      <div class="widget">
+        <h3 class="w-title">Topics</h3>
+        <div class="tags">
+          <a href="#" class="tag">Watering</a><a href="#" class="tag">Seeds</a><a href="#" class="tag">Pruning</a><a href="#" class="tag">Succulents</a><a href="#" class="tag">Pots</a><a href="#" class="tag">Fertiliser</a><a href="#" class="tag">Balcony</a><a href="#" class="tag">Organic</a>
+        </div>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<div class="newsletter" style="position:relative">
+  <div class="newsletter-dots"></div>
+  <h2>A new guide every week 🌱</h2>
+  <p>Seasonal tips, growing tricks and garden news. No spam.</p>
+  <form class="nl-form" onsubmit="return false;">
+    <input type="email" placeholder="your@email.com">
+    <button type="submit">Subscribe</button>
+  </form>
+</div>
+
+<footer>
+  <div class="ft-inner">
+    <div class="ft-brand">
+      <a href="index.html" class="ft-logo">🌿 GrowEasy</a>
+      <p>Gardening, urban growing and houseplant guides to help you create your own green space, with or without a garden.</p>
+    </div>
+    <div class="ft-col">
+      <h4>Categories</h4>
+      <ul>
+        <li><a href="#">Urban veg garden</a></li>
+        <li><a href="#">Houseplants</a></li>
+        <li><a href="#">Flowers & garden</a></li>
+        <li><a href="#">Herbs</a></li>
+        <li><a href="#">Pests & care</a></li>
+      </ul>
+    </div>
+    <div class="ft-col">
+      <h4>Info</h4>
+      <ul>
+        <li><a href="#">About us</a></li>
+        <li><a href="#">Contact</a></li>
+        <li><a href="#">Privacy policy</a></li>
+        <li><a href="#">Legal notice</a></li>
+        <li><a href="../es/index.html">Versión en español</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="ft-bottom">
+    <span>© 2025 GrowEasy. All rights reserved.</span>
+    <a href="#">Cookie policy</a>
+  </div>
+</footer>
+
+</body>
+</html>
