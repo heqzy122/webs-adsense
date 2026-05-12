@@ -1,0 +1,87 @@
+name: Publicador automático de artículos
+
+on:
+  schedule:
+    - cron: '0 8 * * *'  # Cada día a las 8:00 UTC (9:00 España)
+  workflow_dispatch:       # También permite ejecutarlo manualmente desde GitHub
+
+jobs:
+  publicar:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Clonar repositorio
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Instalar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Instalar dependencias
+        run: pip install requests
+
+      - name: Crear config.py con la API key
+        run: |
+          cat > config.py << 'PYEOF'
+          ANTHROPIC_API_KEY = "${{ secrets.ANTHROPIC_API_KEY }}"
+
+          WEBS = {
+              "hogar": {
+                  "ruta": "hogar-web",
+                  "nicho": "mejora del hogar, bricolaje y reformas",
+                  "idioma_es": "es",
+                  "idioma_en": "en",
+                  "nombre_es": "ReformaHogar",
+                  "nombre_en": "HomeRenoGuide",
+              },
+              "autos": {
+                  "ruta": "auto-web",
+                  "nicho": "mantenimiento de coches y accesorios de automoción",
+                  "idioma_es": "es",
+                  "idioma_en": "en",
+                  "nombre_es": "MecánicaFácil",
+                  "nombre_en": "CarCareHub",
+              },
+              "edtech": {
+                  "ruta": "edtech-web",
+                  "nicho": "herramientas digitales, software SaaS y cursos online",
+                  "idioma_es": "es",
+                  "idioma_en": "en",
+                  "nombre_es": "HerramientasDigitales",
+                  "nombre_en": "ToolPick",
+              },
+              "inmobiliario": {
+                  "ruta": "inmobiliario-web",
+                  "nicho": "compra, venta y alquiler de viviendas en España",
+                  "idioma_es": "es",
+                  "idioma_en": "en",
+                  "nombre_es": "PisoGuía",
+                  "nombre_en": "FlatGuide",
+              },
+              "jardineria": {
+                  "ruta": "jardineria-web",
+                  "nicho": "jardinería, huerto urbano y plantas de interior",
+                  "idioma_es": "es",
+                  "idioma_en": "en",
+                  "nombre_es": "HuertaVerde",
+                  "nombre_en": "GrowEasy",
+              },
+          }
+
+          ARTICULOS_POR_WEB = 1
+          MODELO = "claude-sonnet-4-5"
+          PYEOF
+
+      - name: Ejecutar publicador
+        run: python publicador.py
+
+      - name: Subir cambios a GitHub
+        run: |
+          git config user.name "GitHub Actions Bot"
+          git config user.email "actions@github.com"
+          git add .
+          git diff --staged --quiet || git commit -m "Auto: artículos diarios [$(date +'%Y-%m-%d')]"
+          git push
