@@ -3,107 +3,221 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HomeRenoGuide</title>
-<meta name="description" content="Guías prácticas sobre mejora del hogar, bricolaje y reformas.">
+<title>HomeReno Guide — DIY & Home Improvement Guides</title>
+<meta name="description" content="Practical step-by-step guides for DIY projects, home renovations and improvements. Save money and do it yourself with confidence.">
+<meta name="keywords" content="home improvement, DIY, home renovation, how to paint walls, install flooring, renovation budget">
 <link rel="alternate" hreflang="es" href="../es/index.html">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<!-- AdSense: replace XXXXXXXX with your real publisher ID -->
 <!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXX" crossorigin="anonymous"></script> -->
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--serif:'Playfair Display',Georgia,serif;--sans:'DM Sans',system-ui,sans-serif;--ink:#1a1815;--ink-2:#5a5650;--ink-3:#9a9590;--accent:#c8622a;--border:#e8e4de;--bg:#fdfcfa;--cream:#f9f6f1}
-body{font-family:var(--sans);background:var(--bg);color:var(--ink);font-size:16px;line-height:1.7;font-weight:300}
-nav{position:sticky;top:0;z-index:100;background:white;border-bottom:1px solid var(--border);padding:0 clamp(1rem,5vw,4rem);display:flex;align-items:center;justify-content:space-between;height:64px}
-.nav-logo{font-family:var(--serif);font-size:1.25rem;font-weight:600;color:var(--ink);text-decoration:none}
+:root{--cream:#f9f6f1;--warm-white:#fdfcfa;--ink:#1a1815;--ink-light:#5a5650;--ink-faint:#9a9590;--accent:#2a6bc8;--accent-light:#d4e4f0;--border:#e8e4de;--serif:'Playfair Display',Georgia,serif;--sans:'DM Sans',system-ui,sans-serif}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--warm-white);color:var(--ink);font-size:16px;line-height:1.7;font-weight:300}
+nav{position:sticky;top:0;z-index:100;background:var(--warm-white);border-bottom:1px solid var(--border);padding:0 clamp(1rem,5vw,4rem);display:flex;align-items:center;justify-content:space-between;height:64px}
+.nav-logo{font-family:var(--serif);font-size:1.25rem;font-weight:600;color:var(--ink);text-decoration:none;letter-spacing:-.02em}
 .nav-logo span{color:var(--accent)}
-.lang-switch{font-size:.8rem;font-weight:500;color:var(--ink-3);text-decoration:none;border:1px solid var(--border);padding:.3rem .7rem;border-radius:2rem;transition:all .2s}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{font-size:.875rem;color:var(--ink-light);text-decoration:none;transition:color .2s}
+.nav-links a:hover{color:var(--accent)}
+.lang-switch{font-size:.8rem;font-weight:500;color:var(--ink-faint);text-decoration:none;border:1px solid var(--border);padding:.3rem .7rem;border-radius:2rem;transition:all .2s}
 .lang-switch:hover{border-color:var(--accent);color:var(--accent)}
-.ad-slot{background:var(--cream);border:1px dashed var(--border);height:90px;display:flex;align-items:center;justify-content:center;color:var(--ink-3);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;margin:0 clamp(1rem,5vw,4rem) 0}
-.hero{padding:clamp(3rem,8vw,6rem) clamp(1rem,5vw,4rem);max-width:1100px;margin:0 auto;text-align:center}
-.hero-eyebrow{font-size:.75rem;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem}
-.hero h1{font-family:var(--serif);font-size:clamp(2rem,5vw,3rem);font-weight:600;line-height:1.15;letter-spacing:-.02em;margin-bottom:1.25rem}
-.hero p{font-size:1.05rem;color:var(--ink-2);max-width:560px;margin:0 auto}
-.wrap{max-width:1100px;margin:0 auto;padding:2rem clamp(1rem,5vw,4rem) 3rem}
-.sec-header{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:2rem;padding-bottom:1rem;border-bottom:1px solid var(--border)}
-.sec-title{font-family:var(--serif);font-size:1.6rem;font-weight:600;letter-spacing:-.02em}
-.arts-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.5rem;margin-bottom:3rem}
-.art-card{background:white;border:1px solid var(--border);border-radius:4px;text-decoration:none;color:var(--ink);transition:border-color .2s,transform .15s,box-shadow .2s;display:block}
-.art-card:hover{border-color:var(--accent);transform:translateY(-2px);box-shadow:0 4px 16px rgba(200,98,42,.1)}
-.art-card-inner{padding:1.5rem}
-.art-tag{font-size:.68rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:.5rem}
-.art-title{font-family:var(--serif);font-size:1.1rem;font-weight:600;line-height:1.3;margin-bottom:.6rem}
-.art-excerpt{font-size:.84rem;color:var(--ink-2);line-height:1.55;margin-bottom:1rem}
-.art-footer{display:flex;justify-content:space-between;align-items:center;padding-top:.75rem;border-top:1px solid var(--border)}
-.art-date{font-size:.72rem;color:var(--ink-3)}
-.art-link{font-size:.78rem;font-weight:500;color:var(--accent)}
-.newsletter{background:var(--cream);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:3rem clamp(1rem,5vw,4rem);text-align:center}
+.ad-slot{background:var(--cream);border:1px dashed var(--border);border-radius:2px;display:flex;align-items:center;justify-content:center;color:var(--ink-faint);font-size:.75rem;letter-spacing:.08em;text-transform:uppercase}
+.ad-banner{height:90px;margin:0 clamp(1rem,5vw,4rem) 1rem}
+.ad-sidebar{height:250px;width:100%}
+.hero{padding:clamp(4rem,10vw,8rem) clamp(1rem,5vw,4rem);max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+.hero-eyebrow{font-size:.75rem;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);margin-bottom:1.25rem}
+.hero h1{font-family:var(--serif);font-size:clamp(2.2rem,5vw,3.5rem);font-weight:600;line-height:1.15;letter-spacing:-.02em;margin-bottom:1.5rem}
+.hero p{font-size:1.05rem;color:var(--ink-light);margin-bottom:2rem;max-width:480px}
+.hero-cta{display:inline-flex;align-items:center;gap:.5rem;background:var(--accent);color:white;text-decoration:none;padding:.85rem 1.75rem;font-size:.9rem;font-weight:500;border-radius:2px;transition:background .2s,transform .15s}
+.hero-cta:hover{background:#1a5ab8;transform:translateY(-1px)}
+.hero-visual{background:var(--cream);border-radius:4px;aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.hero-visual svg{width:55%;opacity:.15}
+.section{max-width:1100px;margin:0 auto;padding:0 clamp(1rem,5vw,4rem)}
+.section-header{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:2rem;padding-bottom:1rem;border-bottom:1px solid var(--border)}
+.section-title{font-family:var(--serif);font-size:1.6rem;font-weight:600;letter-spacing:-.02em}
+.section-link{font-size:.8rem;color:var(--accent);text-decoration:none;font-weight:500}
+.section-link:hover{text-decoration:underline}
+.cats{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:1rem;margin-bottom:4rem}
+.cat-card{background:var(--cream);border:1px solid var(--border);border-radius:2px;padding:1.5rem 1.25rem;text-decoration:none;color:var(--ink);transition:border-color .2s,transform .15s;display:flex;flex-direction:column;gap:.6rem}
+.cat-card:hover{border-color:var(--accent);transform:translateY(-2px)}
+.cat-icon{font-size:1.5rem}
+.cat-name{font-weight:500;font-size:.9rem}
+.cat-count{font-size:.75rem;color:var(--ink-faint)}
+.articles{display:grid;grid-template-columns:2fr 1fr;gap:2.5rem;margin-bottom:4rem}
+.articles-main{display:flex;flex-direction:column;gap:1.5rem}
+.article-card{display:grid;grid-template-columns:110px 1fr;gap:1.25rem;padding:1.25rem 0;border-bottom:1px solid var(--border);text-decoration:none;color:var(--ink);transition:opacity .2s}
+.article-card:hover{opacity:.7}
+.article-card:last-child{border-bottom:none}
+.article-thumb{background:var(--cream);border-radius:2px;aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-size:2rem;flex-shrink:0}
+.article-tag{font-size:.7rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:.4rem}
+.article-title{font-family:var(--serif);font-size:1.05rem;font-weight:600;line-height:1.35;margin-bottom:.4rem}
+.article-excerpt{font-size:.85rem;color:var(--ink-light);line-height:1.5}
+.article-meta{font-size:.75rem;color:var(--ink-faint);margin-top:.5rem}
+.sidebar{display:flex;flex-direction:column;gap:2rem}
+.sidebar-widget{background:var(--cream);border:1px solid var(--border);border-radius:2px;padding:1.5rem}
+.widget-title{font-family:var(--serif);font-size:1rem;font-weight:600;margin-bottom:1rem;padding-bottom:.75rem;border-bottom:1px solid var(--border)}
+.popular-list{list-style:none;display:flex;flex-direction:column;gap:.75rem}
+.popular-list li{display:flex;gap:.75rem;align-items:flex-start}
+.popular-num{font-family:var(--serif);font-size:1.1rem;font-weight:600;color:var(--accent-light);min-width:1.5rem;line-height:1.3}
+.popular-list a{font-size:.85rem;color:var(--ink);text-decoration:none;line-height:1.4}
+.popular-list a:hover{color:var(--accent)}
+.tag-cloud{display:flex;flex-wrap:wrap;gap:.5rem}
+.tag{font-size:.75rem;background:white;border:1px solid var(--border);padding:.3rem .7rem;border-radius:2rem;text-decoration:none;color:var(--ink-light);transition:all .15s}
+.tag:hover{border-color:var(--accent);color:var(--accent)}
+.newsletter{background:var(--cream);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:3rem clamp(1rem,5vw,4rem);margin:2rem 0;text-align:center}
 .newsletter h2{font-family:var(--serif);font-size:1.5rem;margin-bottom:.5rem}
-.newsletter p{color:var(--ink-2);font-size:.9rem;margin-bottom:1.5rem}
-.nl-form{display:flex;gap:.75rem;max-width:420px;margin:0 auto}
-.nl-form input{flex:1;border:1px solid var(--border);background:white;padding:.75rem 1rem;font-family:var(--sans);font-size:.9rem;border-radius:2px;outline:none}
-.nl-form input:focus{border-color:var(--accent)}
-.nl-form button{background:var(--accent);color:white;border:none;padding:.75rem 1.25rem;font-family:var(--sans);font-size:.85rem;font-weight:500;border-radius:2px;cursor:pointer;white-space:nowrap}
-.nl-form button:hover{background:#b05520}
-footer{background:#1a1815;color:rgba(255,255,255,.45);padding:2rem clamp(1rem,5vw,4rem);text-align:center;font-size:.8rem}
-footer a{color:rgba(255,255,255,.4);text-decoration:none;margin:0 .75rem}
-footer a:hover{color:white}
-@media(max-width:600px){.arts-grid{grid-template-columns:1fr}.nl-form{flex-direction:column}}
+.newsletter p{color:var(--ink-light);font-size:.9rem;margin-bottom:1.5rem}
+.newsletter-form{display:flex;gap:.75rem;max-width:420px;margin:0 auto}
+.newsletter-form input{flex:1;border:1px solid var(--border);background:white;padding:.75rem 1rem;font-family:var(--sans);font-size:.9rem;border-radius:2px;outline:none;transition:border-color .2s}
+.newsletter-form input:focus{border-color:var(--accent)}
+.newsletter-form button{background:var(--accent);color:white;border:none;padding:.75rem 1.25rem;font-family:var(--sans);font-size:.85rem;font-weight:500;border-radius:2px;cursor:pointer;transition:background .2s;white-space:nowrap}
+.newsletter-form button:hover{background:#1a5ab8}
+footer{background:var(--ink);color:rgba(255,255,255,.55);padding:3rem clamp(1rem,5vw,4rem)}
+.footer-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr;gap:3rem}
+.footer-brand p{font-size:.85rem;line-height:1.6;margin-top:.75rem}
+.footer-logo{font-family:var(--serif);font-size:1.25rem;font-weight:600;color:white;text-decoration:none;letter-spacing:-.02em}
+.footer-col h4{font-size:.75rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.8);margin-bottom:1rem}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:.5rem}
+.footer-col a{font-size:.85rem;color:rgba(255,255,255,.5);text-decoration:none;transition:color .2s}
+.footer-col a:hover{color:white}
+.footer-bottom{max-width:1100px;margin:2rem auto 0;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,.1);display:flex;justify-content:space-between;font-size:.75rem}
+.footer-bottom a{color:rgba(255,255,255,.4);text-decoration:none}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.hero-content{animation:fadeUp .6s ease both}
+.hero-visual{animation:fadeUp .6s .15s ease both}
+@media(max-width:768px){.hero{grid-template-columns:1fr;gap:2rem}.hero-visual{display:none}.articles{grid-template-columns:1fr}.sidebar{display:none}.footer-inner{grid-template-columns:1fr;gap:2rem}.nav-links{display:none}.footer-bottom{flex-direction:column;gap:.5rem}}
 </style>
 </head>
 <body>
+
 <nav>
-  <a href="index.html" class="nav-logo">HomeRenoGuide</a>
+  <a href="index.html" class="nav-logo">HomeReno<span>Guide</span></a>
+  <ul class="nav-links">
+    <li><a href="#">Renovation</a></li>
+    <li><a href="#">DIY</a></li>
+    <li><a href="#">Décor</a></li>
+    <li><a href="#">Budgeting</a></li>
+  </ul>
   <a href="../es/index.html" class="lang-switch">ES</a>
 </nav>
-<div class="ad-slot">
+
+<div class="ad-slot ad-banner">
+  <!-- AdSense banner 728x90 -->
   <!-- <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXX" data-ad-slot="XXXXXXXX" data-ad-format="auto"></ins><script>(adsbygoogle=window.adsbygoogle||[]).push({})</script> -->
   <span>Advertisement</span>
 </div>
+
 <section class="hero">
-  <p class="hero-eyebrow">Guías · Consejos · Recursos</p>
-  <h1>HomeRenoGuide</h1>
-  <p>Guías prácticas sobre mejora del hogar, bricolaje y reformas. Contenido nuevo cada semana.</p>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Practical guides · Step by step</p>
+    <h1>Renovate your home without the hassle</h1>
+    <p>DIY projects, renovations and home improvements explained clearly. Save money and do it yourself with confidence.</p>
+    <a href="#articles" class="hero-cta">Browse guides →</a>
+  </div>
+  <div class="hero-visual">
+    <svg viewBox="0 0 100 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M10 40L50 10L90 40V75H60V55H40V75H10V40Z" stroke="#1a1815" stroke-width="3"/>
+      <rect x="42" y="57" width="16" height="18" stroke="#1a1815" stroke-width="2"/>
+      <path d="M35 40H65V58H35Z" stroke="#1a1815" stroke-width="2"/>
+    </svg>
+  </div>
 </section>
-<div class="wrap">
-  <div class="sec-header">
-    <h2 class="sec-title">Latest guides</h2>
+
+<section class="section">
+  <div class="section-header">
+    <h2 class="section-title">Categories</h2>
+    <a href="#" class="section-link">View all →</a>
   </div>
-  <div class="arts-grid">
-    
-      <a href="how-to-refinish-hardwood-floors-without-sanding.html" class="art-card">
-        <div class="art-card-inner">
-          <div class="art-tag">Flooring</div>
-          <h3 class="art-title">How to Refinish Hardwood Floors Without Sanding: A Complete Guide</h3>
-          <p class="art-excerpt">Discover proven methods to restore and refinish your hardwood floors without the mess and effort of traditional sanding techniques.</p>
-          <div class="art-footer">
-            <span class="art-date">2026-05-12</span>
-            <span class="art-link">Read article →</span>
-          </div>
-        </div>
-      </a>
-      <a href="how-much-does-it-cost-to-refinish-hardwood-floors.html" class="art-card">
-        <div class="art-card-inner">
-          <div class="art-tag">Flooring</div>
-          <h3 class="art-title">How Much Does It Cost to Refinish Hardwood Floors in 2024</h3>
-          <p class="art-excerpt">Discover the complete cost breakdown for refinishing hardwood floors, including professional services, DIY options, and factors that affect pricing.</p>
-          <div class="art-footer">
-            <span class="art-date">2026-05-12</span>
-            <span class="art-link">Read article →</span>
-          </div>
-        </div>
-      </a>
+  <div class="cats">
+    <a href="#" class="cat-card"><span class="cat-icon">🔨</span><span class="cat-name">DIY</span><span class="cat-count">42 guides</span></a>
+    <a href="#" class="cat-card"><span class="cat-icon">🎨</span><span class="cat-name">Painting</span><span class="cat-count">28 guides</span></a>
+    <a href="#" class="cat-card"><span class="cat-icon">🏗️</span><span class="cat-name">Renovation</span><span class="cat-count">35 guides</span></a>
+    <a href="#" class="cat-card"><span class="cat-icon">🚿</span><span class="cat-name">Bathroom</span><span class="cat-count">19 guides</span></a>
+    <a href="#" class="cat-card"><span class="cat-icon">🍳</span><span class="cat-name">Kitchen</span><span class="cat-count">24 guides</span></a>
+    <a href="#" class="cat-card"><span class="cat-icon">💡</span><span class="cat-name">Electrical</span><span class="cat-count">16 guides</span></a>
   </div>
-</div>
+</section>
+
+<section class="section" id="articles">
+  <div class="section-header">
+    <h2 class="section-title">Latest guides</h2>
+    <a href="#" class="section-link">View all →</a>
+  </div>
+  <div class="articles">
+    <div class="articles-main">
+      <!-- ARTICULOS_START -->
+      <!-- ARTICULOS_END -->
+    </div>
+    <aside class="sidebar">
+      <div class="ad-slot ad-sidebar">
+        <!-- AdSense 300x250 -->
+        <!-- <ins class="adsbygoogle" style="display:block;width:300px;height:250px" data-ad-client="ca-pub-XXXXXXXX" data-ad-slot="XXXXXXXX"></ins><script>(adsbygoogle=window.adsbygoogle||[]).push({})</script> -->
+        <span>Advertisement</span>
+      </div>
+      <div class="sidebar-widget">
+        <h3 class="widget-title">Most popular</h3>
+        <ul class="popular-list">
+          <li><span class="popular-num">01</span><a href="#">How to fix damp walls for good</a></li>
+          <li><span class="popular-num">02</span><a href="#">Kitchen renovation budget 2025</a></li>
+          <li><span class="popular-num">03</span><a href="#">Installing a mini-split AC: full guide</a></li>
+          <li><span class="popular-num">04</span><a href="#">Matte vs satin paint: which to choose?</a></li>
+          <li><span class="popular-num">05</span><a href="#">How to skim-coat walls like a pro</a></li>
+        </ul>
+      </div>
+      <div class="sidebar-widget">
+        <h3 class="widget-title">Topics</h3>
+        <div class="tag-cloud">
+          <a href="#" class="tag">Flooring</a><a href="#" class="tag">Ceilings</a><a href="#" class="tag">Plumbing</a><a href="#" class="tag">Garden</a><a href="#" class="tag">Insulation</a><a href="#" class="tag">Doors</a><a href="#" class="tag">Windows</a><a href="#" class="tag">Lighting</a>
+        </div>
+      </div>
+    </aside>
+  </div>
+</section>
+
 <div class="newsletter">
   <h2>Get new guides every week</h2>
-  <p>No spam. Just useful content.</p>
-  <form class="nl-form" onsubmit="return false;">
+  <p>No spam. Just practical projects to improve your home.</p>
+  <form class="newsletter-form" onsubmit="return false;">
     <input type="email" placeholder="your@email.com">
     <button type="submit">Subscribe</button>
   </form>
 </div>
+
 <footer>
-  <p>HomeRenoGuide · <a href="#">Privacy</a> · <a href="#">Legal</a> · <a href="../es/index.html">Versión en español</a></p>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a href="index.html" class="footer-logo">HomeReno<span style="color:#2a6bc8">Guide</span></a>
+      <p>Practical DIY and renovation guides to help you improve your home with confidence and without overspending.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Categories</h4>
+      <ul>
+        <li><a href="#">DIY</a></li>
+        <li><a href="#">Painting</a></li>
+        <li><a href="#">Renovation</a></li>
+        <li><a href="#">Electrical</a></li>
+        <li><a href="#">Plumbing</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Info</h4>
+      <ul>
+        <li><a href="#">About us</a></li>
+        <li><a href="#">Contact</a></li>
+        <li><a href="#">Privacy policy</a></li>
+        <li><a href="#">Legal notice</a></li>
+        <li><a href="../es/index.html">Versión en español</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 HomeReno Guide. All rights reserved.</span>
+    <a href="#">Cookie policy</a>
+  </div>
 </footer>
+
 </body>
 </html>

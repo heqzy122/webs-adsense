@@ -3,96 +3,236 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ToolPick</title>
-<meta name="description" content="Guías prácticas sobre herramientas digitales, software SaaS y cursos online.">
+<title>ToolPick — Honest Software & Online Course Comparisons</title>
+<meta name="description" content="Honest comparisons of digital tools, SaaS software and online courses. Find the best option for your work or business with real data.">
+<meta name="keywords" content="software comparison, online courses, SaaS tools, productivity tools, remote work tools, best apps 2025">
 <link rel="alternate" hreflang="es" href="../es/index.html">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600&family=Fraunces:wght@400;600&display=swap" rel="stylesheet">
 <!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXX" crossorigin="anonymous"></script> -->
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--serif:'Playfair Display',Georgia,serif;--sans:'DM Sans',system-ui,sans-serif;--ink:#1a1815;--ink-2:#5a5650;--ink-3:#9a9590;--accent:#c8622a;--border:#e8e4de;--bg:#fdfcfa;--cream:#f9f6f1}
-body{font-family:var(--sans);background:var(--bg);color:var(--ink);font-size:16px;line-height:1.7;font-weight:300}
-nav{position:sticky;top:0;z-index:100;background:white;border-bottom:1px solid var(--border);padding:0 clamp(1rem,5vw,4rem);display:flex;align-items:center;justify-content:space-between;height:64px}
-.nav-logo{font-family:var(--serif);font-size:1.25rem;font-weight:600;color:var(--ink);text-decoration:none}
-.nav-logo span{color:var(--accent)}
-.lang-switch{font-size:.8rem;font-weight:500;color:var(--ink-3);text-decoration:none;border:1px solid var(--border);padding:.3rem .7rem;border-radius:2rem;transition:all .2s}
+:root{--bg:#f0f2f5;--white:#ffffff;--ink:#0d0f12;--ink-2:#454850;--ink-3:#9098a0;--accent:#2563eb;--accent-light:#eff4ff;--accent-dark:#1d4ed8;--green:#16a34a;--border:#dde1e7;--serif:'Fraunces',Georgia,serif;--sans:'Space Grotesk',system-ui,sans-serif}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--bg);color:var(--ink);font-size:16px;line-height:1.65;font-weight:400}
+nav{position:sticky;top:0;z-index:100;background:var(--white);border-bottom:1px solid var(--border);padding:0 clamp(1rem,5vw,4rem);display:flex;align-items:center;justify-content:space-between;height:62px}
+.nav-logo{font-family:var(--sans);font-size:1.05rem;font-weight:600;color:var(--ink);text-decoration:none;display:flex;align-items:center;gap:.4rem}
+.logo-dot{width:8px;height:8px;background:var(--accent);border-radius:50%;display:inline-block}
+.nav-links{display:flex;gap:1.75rem;list-style:none}
+.nav-links a{font-size:.85rem;color:var(--ink-2);text-decoration:none;transition:color .2s}
+.nav-links a:hover{color:var(--accent)}
+.lang-switch{font-size:.78rem;font-weight:500;color:var(--ink-3);text-decoration:none;border:1px solid var(--border);padding:.28rem .65rem;border-radius:2rem;transition:all .2s}
 .lang-switch:hover{border-color:var(--accent);color:var(--accent)}
-.ad-slot{background:var(--cream);border:1px dashed var(--border);height:90px;display:flex;align-items:center;justify-content:center;color:var(--ink-3);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;margin:0 clamp(1rem,5vw,4rem) 0}
-.hero{padding:clamp(3rem,8vw,6rem) clamp(1rem,5vw,4rem);max-width:1100px;margin:0 auto;text-align:center}
-.hero-eyebrow{font-size:.75rem;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem}
-.hero h1{font-family:var(--serif);font-size:clamp(2rem,5vw,3rem);font-weight:600;line-height:1.15;letter-spacing:-.02em;margin-bottom:1.25rem}
-.hero p{font-size:1.05rem;color:var(--ink-2);max-width:560px;margin:0 auto}
-.wrap{max-width:1100px;margin:0 auto;padding:2rem clamp(1rem,5vw,4rem) 3rem}
-.sec-header{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:2rem;padding-bottom:1rem;border-bottom:1px solid var(--border)}
-.sec-title{font-family:var(--serif);font-size:1.6rem;font-weight:600;letter-spacing:-.02em}
-.arts-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.5rem;margin-bottom:3rem}
-.art-card{background:white;border:1px solid var(--border);border-radius:4px;text-decoration:none;color:var(--ink);transition:border-color .2s,transform .15s,box-shadow .2s;display:block}
-.art-card:hover{border-color:var(--accent);transform:translateY(-2px);box-shadow:0 4px 16px rgba(200,98,42,.1)}
-.art-card-inner{padding:1.5rem}
-.art-tag{font-size:.68rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:.5rem}
-.art-title{font-family:var(--serif);font-size:1.1rem;font-weight:600;line-height:1.3;margin-bottom:.6rem}
-.art-excerpt{font-size:.84rem;color:var(--ink-2);line-height:1.55;margin-bottom:1rem}
-.art-footer{display:flex;justify-content:space-between;align-items:center;padding-top:.75rem;border-top:1px solid var(--border)}
-.art-date{font-size:.72rem;color:var(--ink-3)}
-.art-link{font-size:.78rem;font-weight:500;color:var(--accent)}
-.newsletter{background:var(--cream);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:3rem clamp(1rem,5vw,4rem);text-align:center}
-.newsletter h2{font-family:var(--serif);font-size:1.5rem;margin-bottom:.5rem}
-.newsletter p{color:var(--ink-2);font-size:.9rem;margin-bottom:1.5rem}
-.nl-form{display:flex;gap:.75rem;max-width:420px;margin:0 auto}
-.nl-form input{flex:1;border:1px solid var(--border);background:white;padding:.75rem 1rem;font-family:var(--sans);font-size:.9rem;border-radius:2px;outline:none}
-.nl-form input:focus{border-color:var(--accent)}
-.nl-form button{background:var(--accent);color:white;border:none;padding:.75rem 1.25rem;font-family:var(--sans);font-size:.85rem;font-weight:500;border-radius:2px;cursor:pointer;white-space:nowrap}
-.nl-form button:hover{background:#b05520}
-footer{background:#1a1815;color:rgba(255,255,255,.45);padding:2rem clamp(1rem,5vw,4rem);text-align:center;font-size:.8rem}
-footer a{color:rgba(255,255,255,.4);text-decoration:none;margin:0 .75rem}
-footer a:hover{color:white}
-@media(max-width:600px){.arts-grid{grid-template-columns:1fr}.nl-form{flex-direction:column}}
+.ad-slot{background:var(--white);border:1px dashed var(--border);display:flex;align-items:center;justify-content:center;color:var(--ink-3);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase}
+.ad-banner{height:90px;margin:0 clamp(1rem,5vw,4rem)}
+.ad-sidebar{height:250px;width:100%}
+.hero{background:var(--white);border-bottom:1px solid var(--border);padding:clamp(3rem,8vw,6rem) clamp(1rem,5vw,4rem)}
+.hero-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+.hero-badge{display:inline-flex;align-items:center;gap:.4rem;background:var(--accent-light);color:var(--accent);font-size:.72rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:.3rem .75rem;border-radius:2rem;margin-bottom:1.25rem}
+.hero h1{font-family:var(--serif);font-size:clamp(2rem,4.5vw,3rem);font-weight:600;line-height:1.18;letter-spacing:-.01em;color:var(--ink);margin-bottom:1.25rem}
+.hero h1 strong{color:var(--accent);font-weight:600}
+.hero p{font-size:1rem;color:var(--ink-2);margin-bottom:2rem;max-width:460px;line-height:1.7}
+.hero-cta{display:inline-flex;align-items:center;gap:.5rem;background:var(--accent);color:white;text-decoration:none;padding:.82rem 1.6rem;font-size:.9rem;font-weight:500;border-radius:6px;transition:background .2s,transform .15s}
+.hero-cta:hover{background:var(--accent-dark);transform:translateY(-1px)}
+.hero-cards{display:flex;flex-direction:column;gap:.75rem}
+.mini-card{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:1rem 1.25rem;display:flex;align-items:center;gap:.9rem}
+.mini-card-icon{font-size:1.4rem;flex-shrink:0}
+.mini-card-title{font-size:.88rem;font-weight:500;color:var(--ink)}
+.mini-card-sub{font-size:.76rem;color:var(--ink-3);margin-top:.1rem}
+.wrap{max-width:1100px;margin:0 auto;padding:0 clamp(1rem,5vw,4rem)}
+.sec-header{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:1.75rem;padding-bottom:.9rem;border-bottom:1px solid var(--border)}
+.sec-title{font-family:var(--serif);font-size:1.5rem;font-weight:600;letter-spacing:-.01em}
+.sec-link{font-size:.8rem;color:var(--accent);text-decoration:none;font-weight:500}
+.sec-link:hover{text-decoration:underline}
+.cats{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:.85rem;margin-bottom:3.5rem}
+.cat-card{background:var(--white);border:1px solid var(--border);border-radius:8px;padding:1.25rem 1.1rem;text-decoration:none;color:var(--ink);transition:border-color .2s,box-shadow .2s;display:flex;flex-direction:column;gap:.5rem}
+.cat-card:hover{border-color:var(--accent);box-shadow:0 2px 12px rgba(37,99,235,.08)}
+.cat-icon{font-size:1.4rem}
+.cat-name{font-weight:500;font-size:.88rem}
+.cat-count{font-size:.72rem;color:var(--ink-3)}
+.grid-2{display:grid;grid-template-columns:2fr 1fr;gap:2.5rem;margin-bottom:3.5rem}
+.articles-col{display:flex;flex-direction:column;gap:.25rem}
+.art{background:var(--white);border:1px solid var(--border);border-radius:8px;padding:1.25rem;text-decoration:none;color:var(--ink);transition:border-color .2s,box-shadow .2s;margin-bottom:.75rem}
+.art:hover{border-color:var(--accent);box-shadow:0 2px 12px rgba(37,99,235,.08)}
+.art-header{display:flex;align-items:flex-start;gap:1rem;margin-bottom:.75rem}
+.art-icon{font-size:1.6rem;flex-shrink:0;margin-top:.1rem}
+.art-tag{font-size:.68rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:.3rem}
+.art-title{font-family:var(--serif);font-size:1rem;font-weight:600;line-height:1.3;margin-bottom:.35rem}
+.art-excerpt{font-size:.83rem;color:var(--ink-2);line-height:1.55}
+.art-footer{display:flex;align-items:center;justify-content:space-between;margin-top:.75rem;padding-top:.75rem;border-top:1px solid var(--border)}
+.art-meta{font-size:.72rem;color:var(--ink-3)}
+.art-badge{font-size:.68rem;font-weight:600;background:var(--accent-light);color:var(--accent);padding:.2rem .55rem;border-radius:2rem}
+.art-badge.free{background:#dcfce7;color:var(--green)}
+.sidebar{display:flex;flex-direction:column;gap:1.75rem}
+.widget{background:var(--white);border:1px solid var(--border);border-radius:8px;padding:1.35rem}
+.w-title{font-family:var(--serif);font-size:.95rem;font-weight:600;margin-bottom:.9rem;padding-bottom:.7rem;border-bottom:1px solid var(--border)}
+.pop-list{list-style:none;display:flex;flex-direction:column;gap:.7rem}
+.pop-list li{display:flex;gap:.65rem;align-items:flex-start}
+.pop-num{font-size:.85rem;font-weight:600;color:var(--accent-light);min-width:1.4rem;line-height:1.4}
+.pop-list a{font-size:.82rem;color:var(--ink);text-decoration:none;line-height:1.4}
+.pop-list a:hover{color:var(--accent)}
+.tags{display:flex;flex-wrap:wrap;gap:.45rem}
+.tag{font-size:.72rem;background:var(--bg);border:1px solid var(--border);padding:.28rem .65rem;border-radius:2rem;text-decoration:none;color:var(--ink-2);transition:all .15s}
+.tag:hover{border-color:var(--accent);color:var(--accent)}
+.newsletter{background:var(--accent);padding:3rem clamp(1rem,5vw,4rem);margin:1.5rem 0;text-align:center}
+.newsletter h2{font-family:var(--serif);font-size:1.5rem;font-weight:600;margin-bottom:.4rem;color:white}
+.newsletter p{color:rgba(255,255,255,.75);font-size:.9rem;margin-bottom:1.5rem}
+.nl-form{display:flex;gap:.65rem;max-width:420px;margin:0 auto}
+.nl-form input{flex:1;border:none;background:white;padding:.75rem 1rem;font-family:var(--sans);font-size:.88rem;border-radius:6px;outline:none}
+.nl-form button{background:var(--ink);color:white;border:none;padding:.75rem 1.2rem;font-family:var(--sans);font-size:.85rem;font-weight:500;border-radius:6px;cursor:pointer;transition:background .2s;white-space:nowrap}
+.nl-form button:hover{background:#2a2d35}
+footer{background:var(--ink);color:rgba(255,255,255,.5);padding:2.5rem clamp(1rem,5vw,4rem)}
+.ft-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr;gap:2.5rem}
+.ft-brand p{font-size:.82rem;line-height:1.6;margin-top:.7rem}
+.ft-logo{font-family:var(--sans);font-size:1rem;font-weight:600;color:white;text-decoration:none;display:flex;align-items:center;gap:.4rem}
+.ft-col h4{font-size:.7rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.75);margin-bottom:.9rem}
+.ft-col ul{list-style:none;display:flex;flex-direction:column;gap:.45rem}
+.ft-col a{font-size:.82rem;color:rgba(255,255,255,.45);text-decoration:none;transition:color .2s}
+.ft-col a:hover{color:white}
+.ft-bottom{max-width:1100px;margin:1.75rem auto 0;padding-top:1.25rem;border-top:1px solid rgba(255,255,255,.1);display:flex;justify-content:space-between;font-size:.72rem}
+.ft-bottom a{color:rgba(255,255,255,.35);text-decoration:none}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+.hero-inner>div:first-child{animation:fadeUp .55s ease both}
+.hero-cards{animation:fadeUp .55s .12s ease both}
+@media(max-width:768px){.hero-inner{grid-template-columns:1fr}.hero-cards{display:none}.grid-2{grid-template-columns:1fr}.sidebar{display:none}.ft-inner{grid-template-columns:1fr;gap:1.5rem}.nav-links{display:none}.ft-bottom{flex-direction:column;gap:.4rem}}
 </style>
 </head>
 <body>
+
 <nav>
-  <a href="index.html" class="nav-logo">ToolPick</a>
+  <a href="index.html" class="nav-logo"><span class="logo-dot"></span>ToolPick</a>
+  <ul class="nav-links">
+    <li><a href="#">Software</a></li>
+    <li><a href="#">Courses</a></li>
+    <li><a href="#">Productivity</a></li>
+    <li><a href="#">Remote Work</a></li>
+  </ul>
   <a href="../es/index.html" class="lang-switch">ES</a>
 </nav>
-<div class="ad-slot">
+
+<div class="ad-slot ad-banner">
   <!-- <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXX" data-ad-slot="XXXXXXXX" data-ad-format="auto"></ins><script>(adsbygoogle=window.adsbygoogle||[]).push({})</script> -->
   <span>Advertisement</span>
 </div>
+
 <section class="hero">
-  <p class="hero-eyebrow">Guías · Consejos · Recursos</p>
-  <h1>ToolPick</h1>
-  <p>Guías prácticas sobre herramientas digitales, software SaaS y cursos online. Contenido nuevo cada semana.</p>
-</section>
-<div class="wrap">
-  <div class="sec-header">
-    <h2 class="sec-title">Latest guides</h2>
+  <div class="hero-inner">
+    <div>
+      <div class="hero-badge">⚡ Honest comparisons</div>
+      <h1>The best digital tools, <strong>no hidden bias</strong></h1>
+      <p>We compare software, courses and productivity tools so you can choose with real data — not paid influencer opinions.</p>
+      <a href="#articles" class="hero-cta">Browse comparisons →</a>
+    </div>
+    <div class="hero-cards">
+      <div class="mini-card">
+        <span class="mini-card-icon">🎓</span>
+        <div><div class="mini-card-title">Online courses</div><div class="mini-card-sub">Udemy vs Coursera vs LinkedIn Learning</div></div>
+      </div>
+      <div class="mini-card">
+        <span class="mini-card-icon">📊</span>
+        <div><div class="mini-card-title">Project management</div><div class="mini-card-sub">Notion vs Trello vs Asana</div></div>
+      </div>
+      <div class="mini-card">
+        <span class="mini-card-icon">💻</span>
+        <div><div class="mini-card-title">Remote work</div><div class="mini-card-sub">Slack vs Teams vs Discord</div></div>
+      </div>
+    </div>
   </div>
-  <div class="arts-grid">
-    
-      <a href="how-to-choose-best-email-marketing-software-small-business.html" class="art-card">
-        <div class="art-card-inner">
-          <div class="art-tag">Email Marketing</div>
-          <h3 class="art-title">How to Choose the Best Email Marketing Software for Small Business in 2024</h3>
-          <p class="art-excerpt">A comprehensive guide to help small business owners choose the right email marketing platform based on features, budget, and growth objectives.</p>
-          <div class="art-footer">
-            <span class="art-date">2026-05-12</span>
-            <span class="art-link">Read article →</span>
-          </div>
-        </div>
-      </a>
+</section>
+
+<div style="padding:2.5rem 0">
+  <div class="wrap">
+    <div class="sec-header">
+      <h2 class="sec-title">Categories</h2>
+      <a href="#" class="sec-link">View all →</a>
+    </div>
+    <div class="cats">
+      <a href="#" class="cat-card"><span class="cat-icon">🎓</span><span class="cat-name">Online courses</span><span class="cat-count">31 reviews</span></a>
+      <a href="#" class="cat-card"><span class="cat-icon">📊</span><span class="cat-name">Project management</span><span class="cat-count">24 reviews</span></a>
+      <a href="#" class="cat-card"><span class="cat-icon">✍️</span><span class="cat-name">Writing & content</span><span class="cat-count">18 reviews</span></a>
+      <a href="#" class="cat-card"><span class="cat-icon">💻</span><span class="cat-name">Remote work</span><span class="cat-count">22 reviews</span></a>
+      <a href="#" class="cat-card"><span class="cat-icon">📈</span><span class="cat-name">Digital marketing</span><span class="cat-count">27 reviews</span></a>
+      <a href="#" class="cat-card"><span class="cat-icon">🤖</span><span class="cat-name">AI tools</span><span class="cat-count">19 reviews</span></a>
+    </div>
   </div>
 </div>
+
+<div class="wrap" id="articles" style="margin-top:1rem">
+  <div class="sec-header">
+    <h2 class="sec-title">Latest comparisons</h2>
+    <a href="#" class="sec-link">View all →</a>
+  </div>
+  <div class="grid-2">
+    <div class="articles-col">
+      <!-- ARTICULOS_START -->
+      <!-- ARTICULOS_END -->
+    </div>
+    <aside class="sidebar">
+      <div class="ad-slot ad-sidebar">
+        <!-- <ins class="adsbygoogle" style="display:block;width:300px;height:250px" data-ad-client="ca-pub-XXXXXXXX" data-ad-slot="XXXXXXXX"></ins><script>(adsbygoogle=window.adsbygoogle||[]).push({})</script> -->
+        <span>Advertisement</span>
+      </div>
+      <div class="widget">
+        <h3 class="w-title">Most viewed</h3>
+        <ul class="pop-list">
+          <li><span class="pop-num">01</span><a href="#">Best free VPN in 2025</a></li>
+          <li><span class="pop-num">02</span><a href="#">Canva vs Adobe Express: which to use</a></li>
+          <li><span class="pop-num">03</span><a href="#">Google Workspace vs Microsoft 365</a></li>
+          <li><span class="pop-num">04</span><a href="#">Best free Python courses online</a></li>
+          <li><span class="pop-num">05</span><a href="#">Zoom vs Google Meet vs Teams</a></li>
+        </ul>
+      </div>
+      <div class="widget">
+        <h3 class="w-title">Topics</h3>
+        <div class="tags">
+          <a href="#" class="tag">SaaS</a><a href="#" class="tag">Free</a><a href="#" class="tag">AI</a><a href="#" class="tag">Design</a><a href="#" class="tag">SEO</a><a href="#" class="tag">Coding</a><a href="#" class="tag">Finance</a><a href="#" class="tag">Languages</a>
+        </div>
+      </div>
+    </aside>
+  </div>
+</div>
+
 <div class="newsletter">
-  <h2>Get new guides every week</h2>
-  <p>No spam. Just useful content.</p>
+  <h2>One new comparison every week</h2>
+  <p>No sponsors. Just honest analysis to help you choose better.</p>
   <form class="nl-form" onsubmit="return false;">
     <input type="email" placeholder="your@email.com">
     <button type="submit">Subscribe</button>
   </form>
 </div>
+
 <footer>
-  <p>ToolPick · <a href="#">Privacy</a> · <a href="#">Legal</a> · <a href="../es/index.html">Versión en español</a></p>
+  <div class="ft-inner">
+    <div class="ft-brand">
+      <a href="index.html" class="ft-logo"><span class="logo-dot" style="background:var(--accent)"></span>ToolPick</a>
+      <p>Honest comparisons of software, courses and digital tools to help you make better decisions without wasting time.</p>
+    </div>
+    <div class="ft-col">
+      <h4>Categories</h4>
+      <ul>
+        <li><a href="#">Online courses</a></li>
+        <li><a href="#">Management</a></li>
+        <li><a href="#">Remote work</a></li>
+        <li><a href="#">Marketing</a></li>
+        <li><a href="#">AI tools</a></li>
+      </ul>
+    </div>
+    <div class="ft-col">
+      <h4>Info</h4>
+      <ul>
+        <li><a href="#">About us</a></li>
+        <li><a href="#">Contact</a></li>
+        <li><a href="#">Privacy policy</a></li>
+        <li><a href="#">Legal notice</a></li>
+        <li><a href="../es/index.html">Versión en español</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="ft-bottom">
+    <span>© 2025 ToolPick. All rights reserved.</span>
+    <a href="#">Cookie policy</a>
+  </div>
 </footer>
+
 </body>
 </html>
