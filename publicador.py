@@ -31,7 +31,7 @@ def llamar_claude(prompt: str) -> str:
         },
         json={
             "model": MODELO,
-            "max_tokens": 4000,
+            "max_tokens": 8000,
             "messages": [{"role": "user", "content": prompt}],
         },
         timeout=120,
@@ -44,24 +44,40 @@ def generar_articulo(nicho: str, idioma: str, articulos_existentes: list) -> dic
     lang_name = "español" if idioma == "es" else "English"
     evitar = ", ".join(articulos_existentes[-20:]) if articulos_existentes else "ninguno"
 
-    prompt = f"""Eres un experto en SEO y redacción de contenido web sobre {nicho}.
+    prompt = f"""Eres un experto con más de 10 años de experiencia práctica en {nicho}. Escribes contenido profundo, honesto y útil basado en experiencia real.
 
-Genera un artículo completo en {lang_name} con estas características:
-- Orientado a SEO: incluye una keyword principal de cola larga con buen CPC
-- Útil y práctico para el lector
-- Entre 800 y 1000 palabras
-- Estructura clara con subtítulos H2 y H3
-- NO generes estos temas que ya existen: {evitar}
+Genera un artículo completo en {lang_name} siguiendo estas instrucciones al pie de la letra:
+
+KEYWORD Y TEMA:
+- Elige una keyword de cola larga muy específica con intención de búsqueda clara (informacional o transaccional)
+- Que tenga buen CPC (mínimo 0.5€) y baja-media competencia
+- NO repitas estos temas ya publicados: {evitar}
+
+ESTRUCTURA OBLIGATORIA DEL ARTÍCULO (1500-2000 palabras):
+1. Introducción con el problema que resuelve (2-3 párrafos, incluye keyword en el primero)
+2. Al menos 4 secciones H2 con contenido detallado
+3. Subsecciones H3 donde sea relevante
+4. Una sección H2 llamada "Errores comunes que debes evitar" con lista de errores reales
+5. Una sección H2 de preguntas frecuentes (FAQ) con 4-5 preguntas y respuestas concretas
+6. Conclusión con llamada a la acción
+
+REQUISITOS DE CALIDAD:
+- Datos concretos, cifras y ejemplos reales donde sea posible
+- Lenguaje natural, como si lo escribiera una persona experta
+- Incluir consejos que solo alguien con experiencia real sabría
+- Listas con al menos 3-5 puntos donde uses ul/li
+- Negritas en los conceptos más importantes con <strong>
 
 Responde ÚNICAMENTE con un JSON válido (sin markdown, sin explicaciones), con esta estructura exacta:
 {{
-  "titulo": "Título del artículo (con keyword principal)",
-  "slug": "titulo-en-minusculas-con-guiones",
-  "descripcion": "Meta description de 150 caracteres máximo",
-  "keyword": "keyword principal",
+  "titulo": "Título del artículo optimizado para SEO (con keyword principal)",
+  "slug": "titulo-en-minusculas-con-guiones-sin-acentos",
+  "descripcion": "Meta description de 150 caracteres máximo que incite al clic",
+  "keyword": "keyword principal de cola larga",
   "categoria": "categoría del artículo",
-  "extracto": "Resumen del artículo en 1-2 frases para mostrar en el listado",
-  "contenido_html": "<article>...contenido completo en HTML con etiquetas h2, h3, p, ul, li...</article>"
+  "autor": "nombre ficticio realista de experto en el tema",
+  "extracto": "Resumen del artículo en 2 frases que expliquen el valor para el lector",
+  "contenido_html": "<article>...contenido completo en HTML con h2, h3, p, ul, li, strong...</article>"
 }}"""
 
     respuesta = llamar_claude(prompt)
@@ -133,9 +149,10 @@ footer a:hover{{color:white}}
     <span class="art-cat">{articulo['categoria']}</span>
     <span>{fecha}</span>
     <span>·</span>
-    <span>{articulo['keyword']}</span>
+    <span>Por <strong>{articulo.get('autor', 'Equipo editorial')}</strong></span>
   </div>
   <h1>{articulo['titulo']}</h1>
+  <p class="art-intro">{articulo.get('extracto', '')}</p>
   <div class="ad-mid">
     <!-- <ins class="adsbygoogle" style="display:block;width:300px;height:250px" data-ad-client="ca-pub-XXXXXXXX" data-ad-slot="XXXXXXXX"></ins><script>(adsbygoogle=window.adsbygoogle||[]).push({{}})</script> -->
     <span>Publicidad</span>
