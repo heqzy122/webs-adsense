@@ -31,10 +31,10 @@ def llamar_claude(prompt: str) -> str:
         },
         json={
             "model": MODELO,
-            "max_tokens": 8000,
+            "max_tokens": 4000,
             "messages": [{"role": "user", "content": prompt}],
         },
-        timeout=120,
+        timeout=180,
     )
     response.raise_for_status()
     return response.json()["content"][0]["text"]
