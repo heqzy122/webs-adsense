@@ -1,8 +1,5 @@
 """
-publicador.py — Genera artículos con Claude y los sube a GitHub/Netlify
-Uso: python publicador.py
-     python publicador.py --web hogar
-     python publicador.py --web hogar --lang es
+publicador.py — Genera artículos con Claude y los sube a GitHub/Cloudflare
 """
 
 import re
@@ -20,8 +17,7 @@ def info(msg):  print(f"  ℹ️  {msg}")
 def err(msg):   print(f"  ❌ {msg}")
 def titulo(msg): print(f"\n{'='*55}\n  {msg}\n{'='*55}")
 
-# ── Claude API ────────────────────────────────────────────────
-def llamar_claude(prompt: str) -> str:
+def llamar_claude(prompt: str, max_tokens: int = 3000) -> str:
     response = requests.post(
         "https://api.anthropic.com/v1/messages",
         headers={
@@ -31,7 +27,7 @@ def llamar_claude(prompt: str) -> str:
         },
         json={
             "model": MODELO,
-            "max_tokens": 3000,
+            "max_tokens": max_tokens,
             "messages": [{"role": "user", "content": prompt}],
         },
         timeout=180,
@@ -39,68 +35,48 @@ def llamar_claude(prompt: str) -> str:
     response.raise_for_status()
     return response.json()["content"][0]["text"]
 
-# ── Generar artículo ──────────────────────────────────────────
 def generar_articulo(nicho: str, idioma: str, articulos_existentes: list) -> dict:
     lang_name = "español" if idioma == "es" else "English"
     evitar = ", ".join(articulos_existentes[-20:]) if articulos_existentes else "ninguno"
 
-    prompt = f"""Eres un experto con más de 10 años de experiencia práctica en {nicho}. Escribes contenido profundo, honesto y útil basado en experiencia real.
+    # Paso 1: generar metadatos (JSON pequeño, sin HTML)
+    prompt_meta = f"""Eres un experto en SEO sobre {nicho}.
 
-Genera un artículo completo en {lang_name} siguiendo estas instrucciones al pie de la letra:
+Elige un tema para un artículo en {lang_name} con estas condiciones:
+- Keyword de cola larga con buen CPC y baja competencia
+- NO repitas estos temas: {evitar}
 
-KEYWORD Y TEMA:
-- Elige una keyword de cola larga muy específica con intención de búsqueda clara (informacional o transaccional)
-- Que tenga buen CPC (mínimo 0.5€) y baja-media competencia
-- NO repitas estos temas ya publicados: {evitar}
+Responde SOLO con este JSON (sin markdown):
+{{"titulo": "...", "slug": "slug-sin-acentos", "descripcion": "meta description max 150 chars", "keyword": "...", "categoria": "...", "autor": "nombre ficticio experto", "extracto": "2 frases resumen"}}"""
 
-ESTRUCTURA OBLIGATORIA DEL ARTÍCULO (600-800 palabras):
-1. Introducción con el problema que resuelve (2-3 párrafos, incluye keyword en el primero)
-2. Al menos 4 secciones H2 con contenido detallado
-3. Subsecciones H3 donde sea relevante
-4. Una sección H2 llamada "Errores comunes que debes evitar" con lista de errores reales
-5. Una sección H2 de preguntas frecuentes (FAQ) con 4-5 preguntas y respuestas concretas
-6. Conclusión con llamada a la acción
+    respuesta_meta = llamar_claude(prompt_meta, max_tokens=500)
+    respuesta_meta = re.sub(r"^```json\s*", "", respuesta_meta.strip())
+    respuesta_meta = re.sub(r"\s*```$", "", respuesta_meta.strip())
+    meta = json.loads(respuesta_meta)
 
-REQUISITOS DE CALIDAD:
-- Datos concretos, cifras y ejemplos reales donde sea posible
-- Lenguaje natural, como si lo escribiera una persona experta
-- Incluir consejos que solo alguien con experiencia real sabría
-- Listas con al menos 3-5 puntos donde uses ul/li
-- Negritas en los conceptos más importantes con <strong>
+    # Paso 2: generar contenido en HTML puro (sin JSON)
+    prompt_contenido = f"""Escribe un artículo en {lang_name} sobre: {meta['titulo']}
 
-Responde ÚNICAMENTE con un JSON válido (sin markdown, sin explicaciones), con esta estructura exacta:
-{{
-  "titulo": "Título del artículo optimizado para SEO (con keyword principal)",
-  "slug": "titulo-en-minusculas-con-guiones-sin-acentos",
-  "descripcion": "Meta description de 150 caracteres máximo que incite al clic",
-  "keyword": "keyword principal de cola larga",
-  "categoria": "categoría del artículo",
-  "autor": "nombre ficticio realista de experto en el tema",
-  "extracto": "Resumen del artículo en 2 frases que expliquen el valor para el lector",
-  "contenido_html": "<article>...contenido completo en HTML con h2, h3, p, ul, li, strong...</article>"
-}}"""
+Keyword principal: {meta['keyword']}
 
-    respuesta = llamar_claude(prompt)
-    respuesta = re.sub(r"^```json\s*", "", respuesta.strip())
-    respuesta = re.sub(r"\s*```$", "", respuesta.strip())
-    respuesta = respuesta.replace('\t', ' ')
-    try:
-        return json.loads(respuesta)
-    except json.JSONDecodeError:
-        import re as re2
-        resultado = {}
-        for campo in ['titulo', 'slug', 'descripcion', 'keyword', 'categoria', 'autor', 'extracto']:
-            match = re2.search(rf'"{campo}"\s*:\s*"(.*?)"(?=\s*,\s*"|\s*}})', respuesta, re2.DOTALL)
-            if match:
-                resultado[campo] = match.group(1)
-        match = re2.search(r'"contenido_html"\s*:\s*"(.*?)"\s*}', respuesta, re2.DOTALL)
-        if match:
-            resultado['contenido_html'] = match.group(1).replace('\\"', '"').replace('\\n', '\n')
-        if 'titulo' in resultado and 'contenido_html' in resultado:
-            return resultado
-        raise
+ESTRUCTURA (500-600 palabras):
+- Introducción con el problema (1 párrafo)
+- 3-4 secciones con subtítulo H2
+- Lista de errores comunes (ul/li)
+- 3 preguntas frecuentes (FAQ) con H3
+- Conclusión breve
 
-# ── HTML del artículo ─────────────────────────────────────────
+Usa etiquetas HTML: <h2>, <h3>, <p>, <ul>, <li>, <strong>
+Empieza directamente con el HTML, sin explicaciones ni markdown."""
+
+    contenido_html = llamar_claude(prompt_contenido, max_tokens=2500)
+    # Limpiar si viene con backticks
+    contenido_html = re.sub(r"^```html\s*", "", contenido_html.strip())
+    contenido_html = re.sub(r"\s*```$", "", contenido_html.strip())
+
+    meta['contenido_html'] = f"<article>{contenido_html}</article>"
+    return meta
+
 def construir_html_articulo(articulo: dict, web: dict, idioma: str) -> str:
     nombre_web = web["nombre_es"] if idioma == "es" else web["nombre_en"]
     otro_idioma = "en" if idioma == "es" else "es"
@@ -129,7 +105,6 @@ def construir_html_articulo(articulo: dict, web: dict, idioma: str) -> str:
 body{{font-family:var(--sans);background:var(--bg);color:var(--ink);font-size:17px;line-height:1.75;font-weight:300}}
 nav{{background:white;border-bottom:1px solid var(--border);padding:0 clamp(1rem,5vw,4rem);display:flex;align-items:center;justify-content:space-between;height:60px;position:sticky;top:0;z-index:100}}
 .nav-logo{{font-family:var(--serif);font-size:1.1rem;font-weight:600;color:var(--ink);text-decoration:none}}
-.nav-logo span{{color:var(--accent)}}
 .back{{font-size:.85rem;color:var(--accent);text-decoration:none;font-weight:500}}
 .back:hover{{text-decoration:underline}}
 .ad-banner{{background:#f9f6f1;border:1px dashed var(--border);height:90px;display:flex;align-items:center;justify-content:center;color:var(--ink-3);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;margin:0 clamp(1rem,5vw,4rem) 1.5rem}}
@@ -137,6 +112,7 @@ main{{max-width:760px;margin:0 auto;padding:2.5rem clamp(1rem,5vw,2rem) 4rem}}
 .art-meta{{font-size:.78rem;color:var(--ink-3);margin-bottom:1.5rem;display:flex;gap:1rem;align-items:center;flex-wrap:wrap}}
 .art-cat{{background:#f0e0d4;color:var(--accent);padding:.2rem .6rem;border-radius:2rem;font-weight:500;font-size:.72rem;letter-spacing:.06em;text-transform:uppercase}}
 h1{{font-family:var(--serif);font-size:clamp(1.8rem,4vw,2.6rem);font-weight:600;line-height:1.18;letter-spacing:-.01em;margin-bottom:1.25rem}}
+.art-intro{{font-size:1.05rem;color:var(--ink-2);margin-bottom:2rem;font-style:italic}}
 article h2{{font-family:var(--serif);font-size:1.45rem;font-weight:600;margin:2.25rem 0 .85rem;line-height:1.25}}
 article h3{{font-family:var(--serif);font-size:1.15rem;font-weight:600;margin:1.75rem 0 .65rem}}
 article p{{margin-bottom:1.25rem;color:var(--ink-2)}}
@@ -147,7 +123,6 @@ article strong{{color:var(--ink);font-weight:500}}
 footer{{background:#1a1815;color:rgba(255,255,255,.45);padding:2rem clamp(1rem,5vw,4rem);text-align:center;font-size:.8rem}}
 footer a{{color:rgba(255,255,255,.4);text-decoration:none;margin:0 .75rem}}
 footer a:hover{{color:white}}
-@media(max-width:600px){{main{{padding:1.5rem 1rem 3rem}}}}
 </style>
 </head>
 <body>
@@ -156,20 +131,19 @@ footer a:hover{{color:white}}
   <a href="../{idioma}/index.html" class="back">{volver}</a>
 </nav>
 <div class="ad-banner">
-  <!-- <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXX" data-ad-slot="XXXXXXXX" data-ad-format="auto"></ins><script>(adsbygoogle=window.adsbygoogle||[]).push({{}})</script> -->
+  <!-- AdSense banner -->
   <span>Publicidad</span>
 </div>
 <main>
   <div class="art-meta">
     <span class="art-cat">{articulo['categoria']}</span>
     <span>{fecha}</span>
-    <span>·</span>
-    <span>Por <strong>{articulo.get('autor', 'Equipo editorial')}</strong></span>
+    <span>· Por <strong>{articulo.get('autor', 'Equipo editorial')}</strong></span>
   </div>
   <h1>{articulo['titulo']}</h1>
   <p class="art-intro">{articulo.get('extracto', '')}</p>
   <div class="ad-mid">
-    <!-- <ins class="adsbygoogle" style="display:block;width:300px;height:250px" data-ad-client="ca-pub-XXXXXXXX" data-ad-slot="XXXXXXXX"></ins><script>(adsbygoogle=window.adsbygoogle||[]).push({{}})</script> -->
+    <!-- AdSense 300x250 -->
     <span>Publicidad</span>
   </div>
   {articulo['contenido_html']}
@@ -180,7 +154,6 @@ footer a:hover{{color:white}}
 </body>
 </html>"""
 
-# ── Inyectar artículos en el index original ───────────────────
 def inyectar_articulos(ruta_web: str, web: dict, idioma: str, historial: list):
     index_path = Path(ruta_web) / idioma / "index.html"
     if not index_path.exists():
@@ -188,17 +161,14 @@ def inyectar_articulos(ruta_web: str, web: dict, idioma: str, historial: list):
         return
 
     content = index_path.read_text(encoding="utf-8")
-
     START = "<!-- ARTICULOS_START -->"
     END   = "<!-- ARTICULOS_END -->"
 
     if START not in content:
-        err(f"No se encontraron marcadores en {idioma}/index.html — asegúrate de usar los index actualizados")
+        err(f"No se encontraron marcadores en {idioma}/index.html")
         return
 
     ver_mas = "Leer artículo →" if idioma == "es" else "Read article →"
-
-    # Construir tarjetas con el estilo original de cada web
     articulos_recientes = list(reversed(historial))[:20]
     cards_html = ""
     for art in articulos_recientes:
@@ -219,15 +189,11 @@ def inyectar_articulos(ruta_web: str, web: dict, idioma: str, historial: list):
     nuevo = f"\n      {START}\n{cards_html}\n      {END}"
     new_content = re.sub(
         rf"{re.escape(START)}.*?{re.escape(END)}",
-        nuevo,
-        content,
-        flags=re.DOTALL,
+        nuevo, content, flags=re.DOTALL,
     )
-
     index_path.write_text(new_content, encoding="utf-8")
     ok(f"index.html actualizado con {len(articulos_recientes)} artículo(s)")
 
-# ── Historial ─────────────────────────────────────────────────
 def cargar_historial(ruta_web: str, idioma: str) -> list:
     path = Path(ruta_web) / f"historial_{idioma}.json"
     if path.exists():
@@ -238,17 +204,15 @@ def guardar_historial(ruta_web: str, idioma: str, historial: list):
     path = Path(ruta_web) / f"historial_{idioma}.json"
     path.write_text(json.dumps(historial, ensure_ascii=False, indent=2), encoding="utf-8")
 
-# ── Git push ──────────────────────────────────────────────────
 def git_push(ruta_web: str, mensaje: str):
     try:
         subprocess.run(["git", "add", "."], cwd=ruta_web, check=True, capture_output=True)
         subprocess.run(["git", "commit", "-m", mensaje], cwd=ruta_web, check=True, capture_output=True)
         subprocess.run(["git", "push"], cwd=ruta_web, check=True, capture_output=True)
-        ok("Git push OK → Netlify desplegará en ~30 segundos")
+        ok("Git push OK → Cloudflare desplegará en ~30 segundos")
     except subprocess.CalledProcessError as e:
         err(f"Error en git: {e.stderr.decode()}")
 
-# ── Procesar web + idioma ─────────────────────────────────────
 def procesar(nombre_web: str, web: dict, idioma: str):
     ruta = web["ruta"]
     carpeta_idioma = Path(ruta) / idioma
@@ -265,13 +229,11 @@ def procesar(nombre_web: str, web: dict, idioma: str):
         try:
             articulo = generar_articulo(web["nicho"], idioma, slugs_existentes)
             html = construir_html_articulo(articulo, web, idioma)
-
             slug = articulo["slug"]
             archivo = carpeta_idioma / f"{slug}.html"
             archivo.write_text(html, encoding="utf-8")
             ok(f"Artículo creado: {idioma}/{slug}.html")
             ok(f"Título: {articulo['titulo']}")
-
             historial.append({
                 "slug": slug,
                 "titulo": articulo["titulo"],
@@ -281,21 +243,16 @@ def procesar(nombre_web: str, web: dict, idioma: str):
                 "idioma": idioma,
             })
             slugs_existentes.append(slug)
-
         except json.JSONDecodeError as e:
             err(f"Claude no devolvió JSON válido: {e}")
         except Exception as e:
             err(f"Error generando artículo: {e}")
 
     guardar_historial(ruta, idioma, historial)
-
-    # Inyectar artículos en el index original manteniendo el diseño
     inyectar_articulos(ruta, web, idioma, historial)
-
     fecha_str = datetime.now().strftime("%Y-%m-%d %H:%M")
     git_push(ruta, f"Auto: {ARTICULOS_POR_WEB} artículo(s) {idioma.upper()} [{fecha_str}]")
 
-# ── Main ──────────────────────────────────────────────────────
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--web", choices=list(WEBS.keys()))
@@ -317,7 +274,7 @@ def main():
             procesar(nombre, web, idioma)
 
     titulo("PROCESO COMPLETADO")
-    print("  Netlify desplegará los cambios en ~1 minuto.\n")
+    print("  Cloudflare desplegará los cambios en ~1 minuto.\n")
 
 if __name__ == "__main__":
     main()
