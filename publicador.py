@@ -31,10 +31,10 @@ def llamar_claude(prompt: str) -> str:
         },
         json={
             "model": MODELO,
-            "max_tokens": 8000,
+            "max_tokens": 2000,
             "messages": [{"role": "user", "content": prompt}],
         },
-        timeout=120,
+        timeout=180,
     )
     response.raise_for_status()
     return response.json()["content"][0]["text"]
@@ -53,7 +53,7 @@ KEYWORD Y TEMA:
 - Que tenga buen CPC (mínimo 0.5€) y baja-media competencia
 - NO repitas estos temas ya publicados: {evitar}
 
-ESTRUCTURA OBLIGATORIA DEL ARTÍCULO (1500-2000 palabras):
+ESTRUCTURA OBLIGATORIA DEL ARTÍCULO (800-1000 palabras):
 1. Introducción con el problema que resuelve (2-3 párrafos, incluye keyword en el primero)
 2. Al menos 4 secciones H2 con contenido detallado
 3. Subsecciones H3 donde sea relevante
