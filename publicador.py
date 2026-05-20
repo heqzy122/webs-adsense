@@ -83,7 +83,25 @@ Responde ÚNICAMENTE con un JSON válido (sin markdown, sin explicaciones), con 
     respuesta = llamar_claude(prompt)
     respuesta = re.sub(r"^```json\s*", "", respuesta.strip())
     respuesta = re.sub(r"\s*```$", "", respuesta.strip())
-    return json.loads(respuesta)
+      respuesta = respuesta.replace('\t', ' ')
+    # Intentar parsear, si falla intentar reparar
+    try:
+        return json.loads(respuesta)
+    except json.JSONDecodeError:
+        # Extraer campos manualmente si el JSON está roto
+        import re
+        resultado = {}
+        for campo in ['titulo', 'slug', 'descripcion', 'keyword', 'categoria', 'autor', 'extracto']:
+            match = re.search(rf'"{campo}"\s*:\s*"(.*?)"(?=\s*,\s*"|\s*}})', respuesta, re.DOTALL)
+            if match:
+                resultado[campo] = match.group(1)
+        # Para contenido_html usar approach diferente
+        match = re.search(r'"contenido_html"\s*:\s*"(.*?)"\s*}', respuesta, re.DOTALL)
+        if match:
+            resultado['contenido_html'] = match.group(1).replace('\\"', '"').replace('\\n', '\n')
+        if 'titulo' in resultado and 'contenido_html' in resultado:
+            return resultado
+        raise
 
 # ── HTML del artículo ─────────────────────────────────────────
 def construir_html_articulo(articulo: dict, web: dict, idioma: str) -> str:
