@@ -31,10 +31,10 @@ def llamar_claude(prompt: str) -> str:
         },
         json={
             "model": MODELO,
-            "max_tokens": 4000,
+            "max_tokens": 8000,
             "messages": [{"role": "user", "content": prompt}],
         },
-        timeout=180,
+        timeout=120,
     )
     response.raise_for_status()
     return response.json()["content"][0]["text"]
@@ -83,20 +83,17 @@ Responde ÚNICAMENTE con un JSON válido (sin markdown, sin explicaciones), con 
     respuesta = llamar_claude(prompt)
     respuesta = re.sub(r"^```json\s*", "", respuesta.strip())
     respuesta = re.sub(r"\s*```$", "", respuesta.strip())
-      respuesta = respuesta.replace('\t', ' ')
-    # Intentar parsear, si falla intentar reparar
+    respuesta = respuesta.replace('\t', ' ')
     try:
         return json.loads(respuesta)
     except json.JSONDecodeError:
-        # Extraer campos manualmente si el JSON está roto
-        import re
+        import re as re2
         resultado = {}
         for campo in ['titulo', 'slug', 'descripcion', 'keyword', 'categoria', 'autor', 'extracto']:
-            match = re.search(rf'"{campo}"\s*:\s*"(.*?)"(?=\s*,\s*"|\s*}})', respuesta, re.DOTALL)
+            match = re2.search(rf'"{campo}"\s*:\s*"(.*?)"(?=\s*,\s*"|\s*}})', respuesta, re2.DOTALL)
             if match:
                 resultado[campo] = match.group(1)
-        # Para contenido_html usar approach diferente
-        match = re.search(r'"contenido_html"\s*:\s*"(.*?)"\s*}', respuesta, re.DOTALL)
+        match = re2.search(r'"contenido_html"\s*:\s*"(.*?)"\s*}', respuesta, re2.DOTALL)
         if match:
             resultado['contenido_html'] = match.group(1).replace('\\"', '"').replace('\\n', '\n')
         if 'titulo' in resultado and 'contenido_html' in resultado:
