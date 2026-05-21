@@ -30,5 +30,13 @@
     "categoria": "SaaS Marketing",
     "fecha": "2026-05-20T21:08:30.155716",
     "idioma": "en"
+  },
+  {
+    "slug": "how-to-integrate-stripe-wordpress-recurring-subscription-payments",
+    "titulo": "How to Integrate Stripe with WordPress for Recurring Subscription Payments",
+    "extracto": "Setting up recurring payments on WordPress doesn't have to be complicated. This guide shows you exactly how to integrate Stripe for automated subscription billing.",
+    "categoria": "Payment Solutions",
+    "fecha": "2026-05-21T11:00:22.112076",
+    "idioma": "en"
   }
 ]
