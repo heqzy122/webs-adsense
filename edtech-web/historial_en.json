@@ -62,5 +62,13 @@
     "categoria": "SaaS Growth",
     "fecha": "2026-05-24T09:49:51.785733",
     "idioma": "en"
+  },
+  {
+    "slug": "how-to-set-up-dunning-management-recover-failed-payments-saas",
+    "titulo": "How to Set Up Dunning Management to Recover Failed Payments in SaaS Businesses",
+    "extracto": "Failed payments cause up to 40% of involuntary churn in SaaS companies. This guide shows you how to implement effective dunning management systems to automatically recover revenue from failed transactions.",
+    "categoria": "SaaS Growth",
+    "fecha": "2026-05-25T11:44:19.671678",
+    "idioma": "en"
   }
 ]
