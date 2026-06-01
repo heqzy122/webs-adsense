@@ -110,5 +110,13 @@
     "categoria": "Email Marketing Automation",
     "fecha": "2026-05-31T10:09:06.123717",
     "idioma": "en"
+  },
+  {
+    "slug": "how-to-set-up-automated-renewal-reminders-saas-subscription-billing",
+    "titulo": "How to Set Up Automated Renewal Reminders for SaaS Subscription Billing",
+    "extracto": "Automated renewal reminders can significantly reduce involuntary churn by ensuring customers update payment details before subscriptions expire. This guide shows you how to implement effective reminder workflows that improve retention and revenue predictability.",
+    "categoria": "SaaS Management",
+    "fecha": "2026-06-01T13:28:39.688050",
+    "idioma": "en"
   }
 ]
